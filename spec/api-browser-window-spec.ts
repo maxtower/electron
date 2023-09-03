@@ -2227,8 +2227,7 @@ describe('BrowserWindow module', () => {
       w.hide();
 
       const hiddenImage = await w.capturePage();
-      const isEmpty = process.platform !== 'darwin';
-      expect(hiddenImage.isEmpty()).to.equal(isEmpty);
+      expect(hiddenImage.isEmpty()).to.equal(false);
     });
 
     it('resolves after the window is hidden and capturer count is non-zero', async () => {
