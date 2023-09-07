@@ -3455,8 +3455,14 @@ v8::Local<v8::Promise> WebContents::CapturePage(gin::Arguments* args) {
   }
 
   auto* const view = web_contents()->GetRenderWidgetHostView();
-  if (!view) {
+  if (!view || view->GetViewBounds().size().IsEmpty()) {
     promise.Resolve(gfx::Image());
+    return handle;
+  }
+
+  if (!view->IsSurfaceAvailableForCopy()) {
+    promise.RejectWithErrorMessage(
+        "Current display surface not available for capture");
     return handle;
   }
 
