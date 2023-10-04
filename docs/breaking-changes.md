@@ -159,6 +159,34 @@ systemPreferences.getColor('alternate-selected-control-text')
 systemPreferences.getColor('selected-content-background')
 ```
 
+### Deprecated: `renderer-process-crashed` event on `app`
+
+The `renderer-process-crashed` event on `app` has been deprecated.
+Use the new `render-process-gone` event instead.
+
+```js
+// Deprecated
+app.on('renderer-process-crashed', (event, webContents, killed) => { /* ... */ })
+
+// Replace with
+app.on('render-process-gone', (event, webContents, details) => { /* ... */ })
+```
+
+### Deprecated: `crashed` event on `WebContents` and `<webview>`
+
+The `crashed` events on `WebContents` and `<webview>` have been deprecated.
+Use the new `render-process-gone` event instead.
+
+```js
+// Deprecated
+win.webContents.on('crashed', (event, killed) => { /* ... */ })
+webview.addEventListener('crashed', (event) => { /* ... */ })
+
+// Replace with
+win.webContents.on('render-process-gone', (event, details) => { /* ... */ })
+webview.addEventListener('render-process-gone', (event) => { /* ... */ })
+```
+
 ## Planned Breaking API Changes (26.0)
 
 ### Deprecated: `webContents.getPrinters`
