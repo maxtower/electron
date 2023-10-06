@@ -525,24 +525,6 @@ describe('app module', () => {
     });
 
     // FIXME: re-enable this test on win32.
-    ifit(process.platform !== 'win32')('should emit renderer-process-crashed event when renderer crashes', async () => {
-      w = new BrowserWindow({
-        show: false,
-        webPreferences: {
-          nodeIntegration: true,
-          contextIsolation: false
-        }
-      });
-      await w.loadURL('about:blank');
-
-      const emitted = once(app, 'renderer-process-crashed') as Promise<[any, WebContents]>;
-      w.webContents.executeJavaScript('process.crash()');
-
-      const [, webContents] = await emitted;
-      expect(webContents).to.equal(w.webContents);
-    });
-
-    // FIXME: re-enable this test on win32.
     ifit(process.platform !== 'win32')('should emit render-process-gone event when renderer crashes', async () => {
       w = new BrowserWindow({
         show: false,
