@@ -2333,7 +2333,7 @@ describe('webContents module', () => {
   describe('crashed event', () => {
     it('does not crash main process when destroying WebContents in it', async () => {
       const contents = (webContents as typeof ElectronInternal.WebContents).create({ nodeIntegration: true });
-      const crashEvent = once(contents, 'render-process-gone');
+      const crashEvent = once(contents, 'crashed');
       await contents.loadURL('about:blank');
       contents.forcefullyCrashRenderer();
       await crashEvent;
